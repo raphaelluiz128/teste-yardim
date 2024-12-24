@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor JSON para CSV - JSON2CSV </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Conversor JSON para CSV</h2>
+    
+    <textarea id="jsonInput" placeholder="Cole seu JSON aqui..."></textarea>
+    
+    <div>
+        <button onclick="convertJsonToCsv()">Converter</button>
+        <button onclick="clearFields()">Limpar</button>
+    </div>
+    
+    <div class="message" id="message"></div>
+    
+    <h2>Resultado</h2>
+    <div id="csvTableContainer"></div>
+</div>
+
+<script src="script.js"></script> 
+</body>
+</html>
