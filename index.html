@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor JSON para CSV - JSON2CSV </title>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="main.js"></script> 
+<script type="module" src="domManipulation.js"></script> 
 </head>
 <body>
 
@@ -14,8 +16,8 @@
     <textarea id="jsonInput" placeholder="Cole seu JSON aqui..."></textarea>
     
     <div>
-        <button onclick="convertJsonToCsv()">Converter</button>
-        <button onclick="clearFields()">Limpar</button>
+        <button id="convertButton">Converter</button>
+        <button id="clearButton">Limpar</button>
     </div>
     
     <div class="message" id="message"></div>
@@ -24,6 +26,7 @@
     <div id="csvTableContainer"></div>
 </div>
 
-<script src="script.js"></script> 
+
+
 </body>
 </html>
