@@ -1,5 +1,8 @@
 import { getKeys } from './utils.js';
-import { clearFields, showMessage, createCsvTable } from './domManipulation.js';
+import { clearFields, showMessage, createCsvTable, saveCsvFile } from './domManipulation.js';
+
+let currentKeys = null;
+let jsonData = null;
 
 export function convertJsonToCsv() {
     const jsonInput = document.getElementById("jsonInput").value;
@@ -15,7 +18,6 @@ export function convertJsonToCsv() {
         return;
     }
 
-    let jsonData;
     try {
         // Tentar analisar o JSON
         jsonData = JSON.parse(jsonInput);
@@ -40,10 +42,19 @@ export function convertJsonToCsv() {
         console.log(`Erro: ${e.message}`);
         return;
     }
-
+    currentKeys = getKeys(jsonData);
     // Criar e exibir a tabela
-    createCsvTable(jsonData, getKeys(jsonData), csvTableContainer);
+    createCsvTable(jsonData, currentKeys, csvTableContainer);
 }
+
+// Evento para salvar o CSV
+document.getElementById("saveButton").addEventListener("click", () => {
+    if (jsonData && currentKeys) {
+        saveCsvFile(jsonData, currentKeys);
+    } else {
+        showMessage('Nenhum CSV foi gerado para salvar!', 'error');
+    }
+});
 
 document.getElementById("convertButton").addEventListener("click", convertJsonToCsv);
 document.getElementById("clearButton").addEventListener("click", clearFields);

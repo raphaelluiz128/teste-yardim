@@ -29,6 +29,35 @@ export function createCsvTable(jsonData, keys, csvTableContainer) {
     csvTableContainer.appendChild(table);
 }
 
+export function saveCsvFile(jsonData, keys) {
+    // Gerar string CSV a partir do JSON
+    const csvRows = [];
+    csvRows.push(keys.join(';')); // Cabeçalho
+
+    jsonData.forEach(row => {
+        const values = keys.map(key => {
+            const value = key.split('.').reduce((acc, cur) => (acc && acc[cur] !== undefined ? acc[cur] : ''), row);
+            return `"${String(value).replace(/"/g, '""')}"`; // Escapar aspas duplas
+        });
+        csvRows.push(values.join(';'));
+    });
+
+    const csvContent = csvRows.join('\n');
+
+    // Criar link para download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'data.csv');
+    document.body.appendChild(link);
+
+    link.click(); // Simula o clique no link
+    document.body.removeChild(link); // Remove o link do DOM
+}
+
+
 export function clearFields() {
     document.getElementById("jsonInput").value = '';
     document.getElementById("csvTableContainer").innerHTML = '';
